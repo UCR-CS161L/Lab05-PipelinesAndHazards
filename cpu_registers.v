@@ -59,7 +59,7 @@ begin
             RFILE[i] <= { `WORD_SIZE {1'b0} } ; 
         end 
     end else begin 
-        if (write_en) begin 
+        if (write_en && dst_addr !== 5'b00000) begin 
             RFILE[dst_addr] <= data_in;				
         end 	
     end
