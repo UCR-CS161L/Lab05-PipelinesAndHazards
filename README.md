@@ -1,4 +1,4 @@
-# Lab 06 - Pipelined Datapath
+# Lab 05 - Pipelined Datapath
 
 ## Introduction
 
