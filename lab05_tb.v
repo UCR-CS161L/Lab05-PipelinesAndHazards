@@ -18,8 +18,8 @@ wire [31:0] write_reg_data;
 integer idx;
 
 initial begin
-    $dumpfile("lab04.vcd");
-    for (idx = 0; idx < 10; idx = idx + 1) begin
+    $dumpfile("lab05.vcd");
+    for (idx = 0; idx < 9; idx = idx + 1) begin
       $dumpvars(0, uut.cpu_registers_i1.RFILE[idx]);
     end
     $dumpvars(0, processor_tb);
@@ -29,7 +29,7 @@ initial begin
 	$readmemb("init.coe", uut.DIG_RAMDualAccess_i4.memory,0,255);
 end 
 
-lab04_pipelined uut (
+lab05_pipelined uut (
     .clk(clk),
     .rst(rst),
     .PC(prog_count),
@@ -44,9 +44,9 @@ lab04_pipelined uut (
   
 initial begin 
     clk = 0; rst = 1; #50; 
-    clk = 1; rst = 1; #50; 
-    clk = 0; rst = 0; 
-         
+    clk = 1; rst = 1; #45; 
+    rst = 0; #5; clk = 0;  
+
     forever begin 
         #50 clk = ~clk;
     end 
@@ -63,8 +63,9 @@ initial begin
 
    /* Individual tests... Check the result after each instruction */
     @(negedge rst); // Wait for reset
+    @(posedge clk); #100;
 
-    for (ticks = 0; ticks < 22; ticks = ticks + 1) begin
+    for (ticks = 0; ticks < 14; ticks = ticks + 1) begin
         @(posedge clk);
         $display("PC: %2d opcode: %06b write reg addr: %2d write reg data: %4h", prog_count, instr_opcode, write_reg_addr, write_reg_data);        
     end
