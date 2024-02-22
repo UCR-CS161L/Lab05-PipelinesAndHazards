@@ -13,10 +13,6 @@
       <boolean>true</boolean>
     </entry>
     <entry>
-      <string>showDataGraph</string>
-      <boolean>true</boolean>
-    </entry>
-    <entry>
       <string>preloadProgramFile</string>
       <file>./init.hex</file>
     </entry>
